@@ -19,8 +19,9 @@ const site = "https://beebom.com/android-tv-background-audio-streaming/";
 
     let $ = cheerio.load((response));
     let blogTitle = $(".entry-title").text().trim();
+    let description = $("p").html();
 
-    console.log(blogTitle);
+    console.log(description);
 
 })();
 

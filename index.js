@@ -3,14 +3,14 @@ const cheerio = require("cheerio");
 const prompt = require("prompt-sync")();
 const imageDownloader = require("node-image-downloader");
 const download = require("images-downloader").images;
+const mkdirp = require("mkdirp");
 
 // const site = prompt("Enter beebom post link\n");
 // console.log(`Site link: ${site}\n`);
 console.log(
   "-------------------------------------------------------------------\n",
 );
-const site =
-  "https://beebom.com/biovyzr-face-shield-with-built-in-air-purifier-system/";
+const site = "https://beebom.com/pencil-can-grow-into-new-plant-end-of-life/";
 
 (async () => {
   let data = [];
@@ -61,11 +61,10 @@ const site =
       }
     }
   });
-  // for (let i = 0; i <= imagesArray.length; i++) {
-  //   console.log(imagesArray[i]);
-  // }
+  const dest = await mkdirp(
+    (`downloads/` + blogTitle).toLowerCase().replace(/[ ,]+/g, "-").toString(),
+  );
 
-  const dest = "downloads";
   download(imagesArray, dest)
     .then((result) => {
       console.log("Images downloaded", result);

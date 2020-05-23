@@ -23,6 +23,7 @@
     "image-downloader": "^4.0.1",
     "images-downloader": "^1.0.3",
     "json2csv": "^5.0.1",
+    "mkdirp": "^1.0.4",
     "node-image-downloader": "^1.0.7",
     "prompt": "^1.0.0",
     "prompt-sync": "^4.2.0",

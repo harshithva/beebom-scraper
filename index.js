@@ -2,13 +2,15 @@ const request = require("./node_modules/request-promise");
 const cheerio = require("cheerio");
 const prompt = require("prompt-sync")();
 const imageDownloader = require("node-image-downloader");
+const download = require("images-downloader").images;
 
 // const site = prompt("Enter beebom post link\n");
 // console.log(`Site link: ${site}\n`);
-// console.log(
-//   "-------------------------------------------------------------------\n",
-// );
-const site = "https://beebom.com/spotify-employees-work-from-home-2020/";
+console.log(
+  "-------------------------------------------------------------------\n",
+);
+const site =
+  "https://beebom.com/biovyzr-face-shield-with-built-in-air-purifier-system/";
 
 (async () => {
   let data = [];
@@ -28,19 +30,12 @@ const site = "https://beebom.com/spotify-employees-work-from-home-2020/";
   let blogTitle = $(".entry-title").text().trim();
 
   let heroImage = $(
-    ".td-post-content > img",
+    "td-post-content > img",
   ).attr("src");
+  console.log(heroImage);
 
-  console.log(`Hero Image : ${heroImage}`);
-
-  imageDownloader({
-    imgs: [
-      {
-        uri: heroImage,
-      },
-    ],
-    dest: "./downloads", //destination folder
-  });
+  let img = [];
+  img.push(heroImage);
 
   console.log(
     "-------------------------------------------------------------------\n",
@@ -55,15 +50,28 @@ const site = "https://beebom.com/spotify-employees-work-from-home-2020/";
     "-------------------------------------------------------------------\n",
   );
 
-  let images = ["Saab", "Volvo", "BMW"];
+  let imagesArray = new Array();
   $("img").each((i, el) => {
-    const item = $(el).attr("src");
-    // console.log(item);
-    images.push(`${item}`);
+    let item = $(el).attr("src");
+
+    if (item) {
+      if (item.endsWith("jpg" || "jpeg")) {
+        console.log(item);
+        imagesArray.push(item.trim().toString());
+      }
+    }
   });
-  for (let i = 0; i <= images.length; i++) {
-    console.log(images[i]);
-  }
+  // for (let i = 0; i <= imagesArray.length; i++) {
+  //   console.log(imagesArray[i]);
+  // }
+
+  const dest = "downloads";
+  download(imagesArray, dest)
+    .then((result) => {
+      console.log("Images downloaded", result);
+    })
+    .catch((error) => console.log("downloaded error", error));
+
   console.log(
     "-------------------------------------------------------------------\n",
   );

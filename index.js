@@ -4,6 +4,7 @@ const prompt = require("prompt-sync")();
 const imageDownloader = require("node-image-downloader");
 const download = require("images-downloader").images;
 const mkdirp = require("mkdirp");
+const puppeteer = require("puppeteer");
 
 // const site = prompt("Enter beebom post link\n");
 // console.log(`Site link: ${site}\n`);
